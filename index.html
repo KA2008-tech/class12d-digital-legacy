@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12D Nexus Real System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Orbitron;}
+
+body{
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* CYBER BACKGROUND */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%, rgba(0,200,255,0.25), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(255,215,0,0.15), transparent 45%),
+#000;
+z-index:-1;
+animation:hue 10s infinite alternate;
+}
+
+@keyframes hue{
+from{filter:hue-rotate(0deg);}
+to{filter:hue-rotate(30deg);}
+}
+
+/* LOADING */
+#loading{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#000;
+z-index:9999;
+}
+
+.loader{
+width:70px;height:70px;
+border:4px solid #333;
+border-top:4px solid #ffd700;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* AUTH */
+#auth{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+input{
+padding:12px;
+margin:6px;
+width:260px;
+border:none;
+border-radius:8px;
+background:#0b1b2e;
+color:#fff;
+border:1px solid rgba(255,215,0,0.3);
+}
+
+.btn{
+padding:10px 22px;
+margin-top:8px;
+background:linear-gradient(90deg,#ffd700,#00c8ff);
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+transition:.3s;
+}
+.btn:hover{transform:scale(1.05);}
+
+/* DASHBOARD */
+#dashboard{
+display:none;
+height:100vh;
+flex-direction:column;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,215,0,0.2);
+}
+
+.logo{
+color:#ffd700;
+font-weight:800;
+}
+
+nav button{
+background:none;
+border:none;
+color:#00c8ff;
+margin:0 10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* CONTENT */
+.content{
+padding:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,215,0,0.2);
+padding:15px;
+border-radius:12px;
+transition:.3s;
+line-height:1.4;
+}
+
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 0 20px rgba(0,200,255,0.3);
+}
+
+.chat-box{
+height:250px;
+overflow-y:auto;
+padding:10px;
+background:rgba(255,255,255,0.05);
+border-radius:10px;
+}
+
+.msg{
+background:rgba(0,200,255,0.15);
+padding:8px;
+margin:5px;
+border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- LOADING -->
+<div id="loading">
+<div class="loader"></div>
+<p>Initializing Secure Nexus Core...</p>
+</div>
+
+<!-- AUTH -->
+<div id="auth">
+<h2>REGISTER / LOGIN</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button class="btn" onclick="register()">Register</button>
+<button class="btn" onclick="login()">Login</button>
+
+<p id="msg"></p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<header>
+<div class="logo">12D NEXUS GLOBAL SYSTEM</div>
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('news')">Announcements</button>
+<button onclick="show('students')">Students</button>
+<button onclick="show('chat')">Chat</button>
+<button onclick="logout()">Logout</button>
+</nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="content">
+<div class="card">
+🔥 Welcome to Class 12D Digital Legacy System<br><br>
+This platform is designed to connect all former students under one secure digital ecosystem.
+</div>
+
+<div class="card">
+📊 System Status: ONLINE<br>
+🟢 Security Layer: ACTIVE<br>
+🟡 Encryption: SHA-256 ENABLED<br>
+🔵 Network Mode: SIMULATED CLOUD
+</div>
+
+<div class="card">
+🌍 Global Objective:<br>
+To build a smart alumni network with communication, learning, and collaboration tools.
+</div>
+</div>
+
+<!-- NEWS -->
+<div id="news" class="content" style="display:none;">
+<div class="card">
+📢 ANNOUNCEMENT 1<br>
+All students are encouraged to update their profiles regularly to maintain system accuracy.
+</div>
+
+<div class="card">
+📢 ANNOUNCEMENT 2<br>
+New features coming soon: AI assistant, file sharing, and live class reunion chat rooms.
+</div>
+
+<div class="card">
+📢 ANNOUNCEMENT 3<br>
+System upgrade scheduled: Enhanced encryption and real-time messaging support.
+</div>
+
+<div class="card">
+📢 ANNOUNCEMENT 4<br>
+Class 12D Legacy initiative aims to preserve academic history digitally.
+</div>
+</div>
+
+<!-- STUDENTS -->
+<div id="students" class="content" style="display:none;">
+<div class="card">
+👤 Rodgers<br>
+Role: System Architect<br>
+Status: Active Developer<br>
+Contribution: Platform creation & design
+</div>
+
+<div class="card">
+👤 Oxcilia<br>
+Role: Member<br>
+Status: Active<br>
+Contribution: Community engagement
+</div>
+
+<div class="card">
+🏫 Class 12D Network<br>
+Status: Unified System Node<br>
+Members: 40+ simulated users<br>
+Purpose: Alumni connectivity system
+</div>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="content" style="display:none;">
+<div class="card">
+💬 CLASS CHAT ROOM<br><br>
+<div class="chat-box" id="chatBox"></div>
+<input id="msg" placeholder="Type message">
+<button class="btn" onclick="send()">Send</button>
+</div>
+</div>
+
+</div>
+
+<script>
+
+let currentUser = localStorage.getItem("user") || "";
+
+/* SHA256 */
+async function hash(text){
+const enc=new TextEncoder().encode(text);
+const buf=await crypto.subtle.digest("SHA-256",enc);
+return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+/* REGISTER */
+async function register(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(!u||!p)return;
+
+let users=JSON.parse(localStorage.getItem("users")||"{}");
+
+if(users[u]){
+document.getElementById("msg").innerText="User already exists!";
+return;
+}
+
+users[u]=await hash(p);
+localStorage.setItem("users",JSON.stringify(users));
+
+document.getElementById("msg").innerText="Registered successfully!";
+}
+
+/* LOGIN */
+async function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+let users=JSON.parse(localStorage.getItem("users")||"{}");
+
+if(!users[u]){
+document.getElementById("msg").innerText="User not found!";
+return;
+}
+
+let hp=await hash(p);
+
+if(users[u]===hp){
+localStorage.setItem("user",u);
+currentUser=u;
+
+document.getElementById("auth").style.display="none";
+document.getElementById("dashboard").style.display="flex";
+
+}else{
+document.getElementById("msg").innerText="Wrong password!";
+}
+}
+
+/* LOADING → AUTH */
+window.onload=()=>{
+setTimeout(()=>{
+document.getElementById("loading").style.display="none";
+document.getElementById("auth").style.display="flex";
+},2000);
+};
+
+/* PAGE SWITCH */
+function show(id){
+document.querySelectorAll(".content").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="grid";
+}
+
+/* CHAT (BIG DEMO TEXT) */
+function send(){
+let m=document.getElementById("msg").value;
+if(!m)return;
+
+let box=document.getElementById("chatBox");
+
+let div=document.createElement("div");
+div.className="msg";
+div.innerHTML = `
+<b>${currentUser}</b>: ${m}<br>
+<span style="opacity:0.6;font-size:12px">
+System Echo: Message delivered through Nexus Core Network ✔
+</span>
+`;
+
+box.appendChild(div);
+document.getElementById("msg").value="";
+}
+
+/* LOGOUT */
+function logout(){
+localStorage.removeItem("user");
+location.reload();
+}
+
+</script>
+
+</body>
+</html>
